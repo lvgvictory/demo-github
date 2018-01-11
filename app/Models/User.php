@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -26,4 +26,26 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    protected $table = 'users';
+
+    public function bill()
+    {
+        return $this->hasMany('App\Models\Bill', 'user_id', 'id');
+    }
+
+    public function comment()
+    {
+        return $this->hasMany('App\Models\Comment', 'user_id', 'id');
+    }
+
+    public function social()
+    {
+        return $this->hasMany('App\Models\Social', 'user_id', 'id');
+    }
+
+    public function new()
+    {
+        return $this->hasMany('App\Models\New', 'user_id', 'id');
+    }
 }
